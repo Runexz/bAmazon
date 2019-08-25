@@ -77,6 +77,16 @@ var addToCart = function () {
                         if (chosenProduct.stock_quantity == 0) {
                             console.log("Sorry we are out of stock of that item. Please check back tomorrow");
                             keepShopping();
+                        } else {
+                            connection.query("UPDATE products SET ? WHERE ?",[{
+                                stock_quantity: answer.amount
+                            }, {
+                                id:chosenProduct.id
+                            }], function (err,res){
+                                console.log("Your order has been placed!");
+                                keepShopping();
+                            })
+                           
                         }
                     })
                 }
