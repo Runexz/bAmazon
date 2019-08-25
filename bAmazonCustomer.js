@@ -36,7 +36,7 @@ var browse = function() {
             if(answer.buyOrNot.toUpperCase()=="BUY"){
                 addToCart();
             } else {
-                console.log("I understand. Please return when you have more money.")
+                keepShopping();
             }
         })
     })
@@ -70,27 +70,19 @@ var addToCart = function () {
 }
 
 
+var keepShopping = function() {
+    inquirer.prompt({
+        name: "continue",
+        type: "rawlist",
+        message: "Would you like to keep shopping?",
+        choices: ["CONTINUE SHOPPING", "LEAVE"]
+    }).then(function(answer){
+        if(answer.continue.toUpperCase()=="LEAVE") {
+            console.log("I understand. Please return when you have more money.")
+        } else {
+            browse();
+        }
+    })
+}
 
 
-
-// var addToCart = function () {
-//     connection.query("SELECT * FROM products", function (err, res) {
-//         inquirer.prompt({
-//             name: "choice",
-//             type: "rawlist",
-//             choices: function(value) {
-//                 var choiceArray = [];
-//                 for (var i = 0; i < res.length; i++) {
-//                     choiceArray.push(res[i].product_name);
-//                 }
-//                 return choiceArray;
-//             },
-//             message: "What product would you like to buy? (keep in mind the stock_quantity)"
-
-//             // }).then(function (answer)){
-
-//             // })
-
-//         })
-//     })
-// }
