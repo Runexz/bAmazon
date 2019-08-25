@@ -25,14 +25,27 @@ connection.connect(function (err) {
 
 var browse = function() {
     connection.query("SELECT * FROM products", function (err, res) {
-        if (err) 
+        if (err) throw (res);
+        console.log(res)
+        inquirer.prompt({
+            name: "buyOrNot",
+            type: "rawlist",
+            message: "Would you like to make a purchase?",
+            choices: ["BUY", "NOT TODAY PAL"]
+        }).then(function(answer){
+            if(answer.buyOrNot.toUpperCase()=="BUY"){
+                addToCart();
+            } else {
+                console.log("I understand. Please return when you have more money.")
+            }
+        })
     })
 }
 
 var addToCart = function () {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw (res);
-        console.log(res);
+        // console.log(res);
         // for (let i = 0; i < res.length; i++) {
         //     console.log(res[i].product_name)
 
