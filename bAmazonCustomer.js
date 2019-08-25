@@ -45,11 +45,6 @@ var browse = function() {
 var addToCart = function () {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw (res);
-        // console.log(res);
-        // for (let i = 0; i < res.length; i++) {
-        //     console.log(res[i].product_name)
-
-        // }
         inquirer.prompt({
             name: "choice",
             type: "rawlist",
@@ -64,6 +59,28 @@ var addToCart = function () {
 
             // })
         }).then(function (answer) {
+            for (var i = 0; i < res.length; i ++) {
+                if (res[i].product_name == answer.choice) {
+                    var chosenProduct = res [i];
+                    inquirer.prompt({
+                        name: "amount",
+                        type: "input",
+                        message: "Quantity amount?",
+                        validate: function(value) {
+                            if(isNaN(value) == false) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }).then(function(answer) {
+                        if (chosenProduct.stock_quantity == 0) {
+                            console.log("Sorry we are out of stock of that item. Please check back tomorrow");
+                            keepShopping();
+                        }
+                    })
+                }
+            }
 
         });
     });
