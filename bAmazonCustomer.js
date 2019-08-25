@@ -1,1 +1,1 @@
-var msql
+var msql = require('mysql');
