@@ -17,7 +17,8 @@ var connection = mysql.createConnection({
 
   connection.connect(function(err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId);
+    console.log("Welcome to bAmazon store # " + connection.threadId);
+    console.log("Please browse our wares!");
   
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw (res);
