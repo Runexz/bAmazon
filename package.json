@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Runexz/bAmazon/issues"
   },
-  "homepage": "https://github.com/Runexz/bAmazon#readme"
+  "homepage": "https://github.com/Runexz/bAmazon#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
 }
