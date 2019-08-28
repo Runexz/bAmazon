@@ -93,12 +93,16 @@ var addToCart = function () {
                             console.log("Sorry we are out of stock of that item. Please check back tomorrow");
                             keepShopping();
                         } else {
+                            var newQuantity = answer.amount - chosenProduct.stock_quantity;
+                            var totalPrice = answer.amount * chosenProduct.price;
+                            
                             connection.query("UPDATE products SET ? WHERE ?", [{
-                                stock_quantity: answer.amount
+                                stock_quantity: newQuantity
                             }, {
                                 id: chosenProduct.id
                             }], function (err, res) {
                                 console.log("Your order has been placed!");
+                                console.log("Your total is " + totalPrice + " !")
                                 keepShopping();
                             })
 
