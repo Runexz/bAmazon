@@ -89,7 +89,7 @@ var addToCart = function () {
                         }
                         //the input will match the database amount
                     }).then(function (answer) {
-                        if (chosenProduct.stock_quantity == 0) {
+                        if (chosenProduct.stock_quantity <= 0) {
                             console.log("Sorry we are out of stock of that item. Please check back tomorrow");
                             keepShopping();
                         } else {
