@@ -92,7 +92,12 @@ var addToCart = function () {
                         if (chosenProduct.stock_quantity === 0) {
                             console.log("Sorry we are out of stock of that item. Please check back tomorrow");
                             keepShopping();
-                        } else {
+                        }
+                     else if (answer.amount > chosenProduct.stock_quantity) {
+                            console.log("You chose more than whats currently in stock!");
+                            keepShopping();
+
+                     } else {
                             var newQuantity = chosenProduct.stock_quantity - answer.amount;
                             var totalPrice = answer.amount * chosenProduct.price;
                             
