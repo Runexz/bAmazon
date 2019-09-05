@@ -89,11 +89,11 @@ var addToCart = function () {
                         }
                         //the input will match the database amount
                     }).then(function (answer) {
-                        if (chosenProduct.stock_quantity <= 0) {
+                        if (chosenProduct.stock_quantity === 0) {
                             console.log("Sorry we are out of stock of that item. Please check back tomorrow");
                             keepShopping();
                         } else {
-                            var newQuantity = answer.amount - chosenProduct.stock_quantity;
+                            var newQuantity = chosenProduct.stock_quantity - answer.amount;
                             var totalPrice = answer.amount * chosenProduct.price;
                             
                             connection.query("UPDATE products SET ? WHERE ?", [{
